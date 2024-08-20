@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold mb-4">Movie Recommendation System</h1>
+        <form method="post" class="mb-8">
+            <label for="movie_title" class="block text-lg font-medium mb-2">Enter a Movie Title:</label>
+            <input type="text" id="movie_title" name="movie_title" class="border border-gray-300 p-2 w-full rounded-lg" required>
+            <button type="submit" class="mt-4 bg-blue-500 text-white p-2 rounded-lg">Get Recommendations</button>
+        </form>
+        {% if movie_data %}
+            <h2 class="text-2xl font-bold mb-4">Recommendations for "{{ movie_title }}":</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {% for movie, link, image in movie_data %}
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <img src="{{ image }}" alt="{{ movie }}" class="w-full h-48 object-cover rounded-lg mb-2">
+                        <h3 class="text-xl font-semibold">
+                            <a href="{{ link }}" target="_blank" class="text-blue-600 hover:underline">{{ movie }}</a>
+                        </h3>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
